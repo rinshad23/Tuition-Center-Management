@@ -1,0 +1,53 @@
+{% extends "ateachermenu.html" %}
+
+{% block title %}Student Attendance{% endblock %}
+
+{% block content %}
+<div class="container mt-4 d-flex justify-content-center">
+    <div class="attendance-form card p-4 shadow" style="max-width: 500px; width: 100%;">
+        <h2 class="text-center mb-4">Student Attendance</h2>
+        <form method="post" action="{% url 'submit_attendance_stud' %}">
+            {% csrf_token %}
+            
+            <div class="form-group mb-3">
+                <label for="studentName">student Name</label>
+                <select id="studentName" name="student" class="form-control" required>
+                    {% for c in student %}
+                    <option value="{{c.id}}">{{c.user.first_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            
+            <div class="form-group mb-3">
+                <label for="attendanceDate">Date</label>
+                <input type="date" id="attendanceDate" name="adate" class="form-control" required>
+            </div>
+            
+            <div class="form-group mb-4">
+                <label>Attendance</label><br>
+                <div class="form-check form-check-inline">
+                    <input type="radio" id="present" name="status" value="Present" class="form-check-input" required>
+                    <label for="present" class="form-check-label">Present</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" id="absent" name="status" value="Absent" class="form-check-input" required>
+                    <label for="absent" class="form-check-label">Absent</label>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+        </form>
+        {% for message in messages %}
+        <h5> 
+            <div class="alert alert-success alert-dismissible fade show mt-5 col-md-12">
+                {{ message }}
+                <button type="button" class="close" data-bs-dismiss="alert" area-label="close">
+                    <span>&times;</span></button>
+            </div>
+        </h5>
+            {% endfor %}
+
+    </div>
+</div>
+{% endblock %}

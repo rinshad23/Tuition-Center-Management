@@ -1,0 +1,52 @@
+{% extends 'adminmenu.html' %}
+
+{% block title %}Add Course{% endblock %}
+
+{% block content %}
+{% with active_page="addcourse" %}
+
+
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+    <div class="card p-4 shadow-lg" style="width: 100%; max-width:500px;">
+        <h3 class="text-center mb-4 text-dark">Add Course</h3>
+          <form method="POST" action="{% url 'addtocourse' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" class="form-control" id="cource" name="cource" placeholder="cource">
+            </div>
+            <div class="form-group">
+                <input type="number" class="form-control" id="fee" name="fee" placeholder="Fee">
+            </div>
+            <div class="form-group">
+                <select name="duration" id="duration" class="form-control" required>
+                    <option value="" disabled selected>Select duration</option>
+                    <option value="1 months">1 month</option>
+                    <option value="3 months">3 months</option>
+                    <option value="6 months">6 months</option>
+                    <option value="12 months">12 months</option>
+                    <option value="24 months">24 months</option>
+                </select>
+            </div>            <div class="mb-3">
+                <div class="custom-file" style="position: relative;">
+                  <input type="file" class="custom-file-input" id="file" name="file" accept="file/*" style="border: 2px solid #6a0dad; border-radius: 5px; padding: 10px; opacity: 0; width: 100%; height: 100%; position: absolute; top: 0; left: 0; cursor: pointer;">
+                  <label class="custom-file-label" for="file">Upload Syllabus</label>
+                </div>
+              </div>    
+            <button type="submit" class="btn btn-primary btn-block">Add</button>
+        </form>
+        {% for message in messages %}
+        <p> 
+            <div class="alert alert-success alert-dismissible fade show mt-5 col-md-12">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" area-label="close">
+                    <span>&times;</span></button>
+            </div>
+        </p>
+            {% endfor %}
+
+    </div>
+</div>   
+{% endwith %}
+{% endblock content %}
+
+    

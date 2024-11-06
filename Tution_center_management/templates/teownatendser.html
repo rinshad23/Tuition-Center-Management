@@ -1,0 +1,27 @@
+{% extends "ateachermenu.html" %}
+
+{% block title %}Attendance Search{% endblock %}
+
+{% block content %}
+<div class="container mt-4 d-flex justify-content-center">
+    <div class="attendance-form card p-4 shadow" style="max-width: 500px; width: 100%;">
+        <h2 class="text-center mb-4">Search Attendance</h2>
+        <form method="post" action="{% url 'teownatendser' %}">
+            {% csrf_token %}
+            
+            
+            <div class="form-group mb-3">
+                <label for="startDate">Start Date</label>
+                <input type="date" id="startDate" name="startDate" class="form-control" required>
+            </div>
+            
+            <div class="form-group mb-4">
+                <label for="endDate">End Date</label>
+                <input type="date" id="endDate" name="endDate" class="form-control" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary w-100">Search</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

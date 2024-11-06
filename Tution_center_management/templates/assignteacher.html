@@ -1,0 +1,66 @@
+
+{% extends 'adminmenu.html' %}
+{% block title %}Assign Teacher{% endblock %}
+{% block content %}
+    
+<div class="row justify-content-center ml-5"> 
+    {% for message in messages %}
+    <p> 
+        <div class="alert alert-success alert-dismissible fade show mt-5 col-md-12">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" area-label="close">
+                <span>&times;</span></button>
+        </div>
+    </p>
+        {% endfor %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4 p-2">Assign Teachers</h2>
+    <div class="table-responsive table-responsive">
+        <table class="table table-bordered table-responsive-sm text-center col-md-11">
+            <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Course</th>
+                    <th>Teachers</th>
+                    <th>Current Teacher</th>
+                    <th>Assign</th>
+
+                </tr>
+            </thead>           
+            <tbody>
+                {% for s in student %}
+
+                <tr>
+                <td style="width:150px;">{{s.user.first_name}}</td>
+                <td style="width:150px;">{{s.course.course_name}}</td>
+                <td style="width:150px;">
+                    <div class="form-group">
+                        <select class="form-control" id="sel{{ s.user.id }}" name="sel" required >
+                            {% for t in teacher %}
+                            {% if t.course.id == s.course.id %}
+                            <option value="{{t.user.id}}">{{t.user.first_name}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </td>
+                <td style="width:150px;">{{s.teacher.first_name}}</td>
+                <td style="width:150px;"><button type="button" onclick="assign('{{ s.user.id }}')" class="btn btn-light">Assign</td>
+
+                </tr>
+                    {% endfor %}
+
+            </tbody>
+
+        </table>
+    </div>
+</div>
+<script>
+    function assign(studentId){
+        teacherId=document.getElementById('sel' + studentId).value;
+        var url=`/assign_teacher/${studentId}/${teacherId}/`;
+        window.location.href = url;
+
+    }
+</script>
+{% endblock content %}

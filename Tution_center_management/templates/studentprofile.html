@@ -1,0 +1,39 @@
+{% extends "astudentmenu.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center mt-5">
+<div class="card text-left" style="width: 18rem;">
+    <div class="row justify-content-center"> 
+
+    <img src="{{ student.image.url }}" class="card-img-top img-fluid w-50" alt="..."></div>
+    <div class="card-body">
+      <h5 class="card-title text-center">{{user.first_name}}</h5>
+      <p class="card-text">
+        Course:{{student.course.course_name}}<br>
+        Username:{{user.username}}<br>
+        Email:{{user.email}}<br>
+        Age:{{student.age}}<br>
+        Phone Number:{{student.phone_number}}<br>
+    
+     </p>
+     <div class="row justify-content-center"> 
+
+      <a href="{% url 'seditp' %}" class="btn btn-primary text-center">Edit</a>
+    </div>
+</div>
+  
+
+{% for message in messages %}
+<p> 
+    <div class="alert alert-success alert-dismissible fade show">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" area-label="close">
+            <span>&times;</span></button>
+    </div>
+</p>
+    {% endfor %}
+</div>
+</div>
+{% endblock %}

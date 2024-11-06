@@ -1,0 +1,43 @@
+{% extends 'ateachermenu.html' %}
+
+{% block content %}
+<div class="row justify-content-center ml-5"> 
+
+  <div class="container my-4">
+    <h2>Submissions from Your Students</h2>
+
+    {% if submissions %}
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Student</th>
+              <th scope="col">Task</th>
+              <th scope="col">Description</th>
+              <th scope="col">File</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for submission in submissions %}
+              <tr>
+                <td>{{ submission.student.user.get_full_name }}</td>
+                <td>{{ submission.task.taskname }}</td>
+                <td>{{ submission.description }}</td>
+                <td>
+                  {% if submission.pdf %}
+                    <a href="{{ submission.pdf.url }}" target="_blank" class="btn btn-primary btn-sm">View File</a>
+                  {% else %}
+                    <span class="text-muted">No file uploaded</span>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="alert alert-info">No submissions found.</p>
+    {% endif %}
+  </div>
+{% endblock %}
+</div>

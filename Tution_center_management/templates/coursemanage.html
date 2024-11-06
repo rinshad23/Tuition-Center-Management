@@ -1,0 +1,43 @@
+
+{% extends 'adminmenu.html' %}
+{% block content %}
+    
+<div class="row justify-content-center ml-5"> 
+    {% for message in messages %}
+    <p> 
+        <div class="alert alert-success alert-dismissible fade show mt-5 col-md-12">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" area-label="close">
+                <span>&times;</span></button>
+        </div>
+    </p>
+        {% endfor %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4 p-2">Courses</h2>
+    <div class="table-responsive table-responsive">
+        <table class="table table-bordered table-responsive-sm">
+            <thead>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Fees</th>
+                    <th>Duration</th>
+                    <th>Syllabus</th>
+                </tr>
+            </thead>           
+            <tbody>
+                {% for u in cor %}
+
+                <tr>
+                <td>{{u.course_name}}</td>
+                <td>{{u.Fees}}</td>
+                <td>{{u.duration}}</td>
+                <td><a href="{{ u.syllabus.url }}">Syllabus</a></td>
+                </tr>
+                    {% endfor %}
+
+            </tbody>
+
+        </table>
+    </div>
+</div>
+{% endblock content %}

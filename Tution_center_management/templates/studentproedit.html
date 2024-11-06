@@ -1,0 +1,64 @@
+{% extends "astudentmenu.html" %}
+
+{% block title %}Student Profile Edit{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center mt-2">
+
+    <!-- Registration Form -->
+    <div class="card p-4 shadow-lg form-container mb-5" id="registerForm" style="width: 100%; max-width: 400px;">
+        {% for message in messages %}
+        <p> 
+            <div class="alert alert-success alert-dismissible fade show mt-5 col-md-12">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" area-label="close">
+                    <span>&times;</span></button>
+            </div>
+        </p>
+            {% endfor %}
+  
+        <h3 class="text-center mb-4 text-dark">Edit Profile</h3>
+        <form action="{% url 'sedit' %}" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="mb-3">FirstName:
+            <input type="text" class="form-control" id="first_name" name="first_name" value="{{user.first_name}}">
+          </div>
+          <div class="mb-3">LastName:
+            <input type="text" class="form-control" id="last_name" name="last_name" value="{{user.last_name}}">
+          </div>
+          <div class="mb-3">Email:
+            <input type="email" class="form-control" id="mail" name="mail" value="{{user.email}}">
+          </div>
+          <div class="mb-3">Username
+            <input type="text" class="form-control" id="usrname" name="usrname" value="{{user.username}}" readonly>
+          </div>
+          <div class="mb-3">Age:
+            <input type="number" class="form-control" id="age" name="age" value="{{student.age}}">
+          </div>
+          <div class="mb-3">Number:
+            <input type="tel" class="form-control" id="contact" name="phone_number" value="{{student.phone_number}}">
+          </div>
+          <div class="mb-3">
+            <img src="{{student.image.url}}" class="w-25"><br>
+            <div class="custom-file" style="position: relative;">
+              <input type="file" class="custom-file-input" id="image" name="image" accept="image/*">
+              <label class="custom-file-label" for="image">Upload Profile Picture</label>
+            </div>
+          </div>
+          <div class="form-group mb-3">Course
+            <select name="sel" class="form-control" id="sel" style="pointer-events:none;">
+                {% for c in course %}
+                {% if c.id == student.course.id %}
+                <option value="{{c.id}}" selected>{{c.course_name}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+  </div>
+
+          <button type="submit" class="btn btn-success w-100">Update</button>
+          <input type="hidden" name="tp" value="3">
+        </form>
+      </div>
+    </div>
+</div>
+{% endblock %}

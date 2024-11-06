@@ -1,0 +1,31 @@
+
+{% extends 'ateachermenu.html' %}
+{% block content %}
+<div class="row justify-content-center ml-5"> 
+   
+<div class="container mt-5">
+    <h2 class="text-center">Tasks</h2>
+    <div class="table-responsive-sm">
+        <table class="table table-bordered text-center col-md-9">
+            <thead>
+                <tr>
+                    <th>Task Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                </tr>
+            </thead>           
+            <tbody>
+                {% for tasks in task %}
+                <tr>
+                <td>{{tasks.taskname}}</td>
+                <td>{{tasks.startdate}}</td>
+                <td>{{tasks.enddate}}</td>
+
+                </tr>
+                    {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+{% endblock content %}

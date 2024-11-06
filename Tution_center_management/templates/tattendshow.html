@@ -1,0 +1,38 @@
+{% extends "adminmenu.html" %}
+
+{% block title %}Attendance Details{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center ml-5"> 
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Attendance Details</h2>
+    
+    <p><strong>Teacher:</strong> {{ teacher.user.first_name }}</p>
+    <p><strong>Date Range:</strong> {{ start_date }} to {{ end_date }}</p>
+    
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in attendance %}
+            <tr>
+                <td>{{ record.date }}</td>
+                <td class="{% if record.status == 'Present' %}text-success{% else %}text-danger{% endif %}">
+                    {{ record.status }}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td>No record found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+{% endblock %}

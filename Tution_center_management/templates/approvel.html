@@ -1,0 +1,63 @@
+
+{% extends 'adminmenu.html' %}
+{% block title %}Approvel{% endblock %}
+{% block content %}
+    
+<div class="row justify-content-center ml-5"> 
+    {% for message in messages %}
+    <p> 
+        <div class="alert alert-success alert-dismissible fade show mt-5 col-md-12">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" area-label="close">
+                <span>&times;</span></button>
+        </div>
+    </p>
+        {% endfor %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4 p-2">Approvel Table</h2>
+    <div class="table-responsive table-responsive">
+        <table class="table table-bordered table-responsive-sm text-center">
+            <thead>
+                <tr>
+                    <th>Usertype</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Course</th>
+                    <th>Age</th>
+                    <th>Phone Number</th>
+                    <th>Image</th>
+                    <th>Action</th>
+                </tr>
+            </thead>           
+            <tbody>
+                {% for user in users %}
+
+                <tr>
+                <td class="{% if user.user_type == '2' %}text-success{% else %}text-info{% endif %}">{% if user.user_type == '2' %}Teacher {% elif user.user_type == '3' %}Student {% endif %}</td>
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{% if user.details %}
+                    {{user.details.course.course_name}}
+                    {% endif %}</td>
+                <td>{{user.details.age}}</td>
+                <td>{% if user.details %}
+                            {{user.details.phone_number}}
+                            {% endif %}</td>
+                <td style="width:50px;"><img src="{{ user.details.image.url }}" class="img-fluid"></td>
+                <td>
+                    {% if user.status == '0' %}
+                    <a href="{% url 'approved' user.id %}" class="btn btn-info">Approve</a>
+                    <a href="{% url 'disapproved' user.id %}" class="btn btn-danger">Dispprove</a>
+                    {% elif user.status == '1' %}
+                    <button class="btn btn-success" disabled>Approved</button>                   
+                    {% endif %}
+                </td>
+                </tr>
+                    {% endfor %}
+
+            </tbody>
+
+        </table>
+    </div>
+</div>
+{% endblock content %}

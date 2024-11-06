@@ -1,0 +1,40 @@
+
+{% extends 'ateachermenu.html' %}
+{% block content %}
+<div class="row justify-content-center ml-5"> 
+   
+<div class="container mt-5">
+    <h2 class="text-center">Students</h2>
+    <div class="table-responsive-sm">
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Course</th>
+                    <th>Age</th>
+                    <th>Phone Number</th>
+                    <th>Image</th>
+                    <th>Action</th>
+                </tr>
+            </thead>           
+            <tbody>
+                {% for u in student %}
+                <tr>
+                <td>{{u.user.first_name}}</td>
+                <td>{{u.user.username}}</td>
+                <td>{{u.user.email}}</td>
+                <td>{{u.course.course_name}}</td>
+                <td>{{u.age}}</td>
+                <td>{{u.phone_number}}</td>
+                <td><img src="{{ u.image.url }}" class="img-fluid rounded-circle w-25"></td>
+                <td><a href="{% url 'delete_student1' u.id %}">Delete</a></td>
+                </tr>
+                    {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+{% endblock content %}

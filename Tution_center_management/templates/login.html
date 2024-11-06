@@ -1,0 +1,36 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center mt-5">
+    <!-- Login Form -->
+    <div class="card p-4 shadow-lg form-container active" id="loginForm" style="width: 100%; max-width: 400px;">
+      <h3 class="text-center mb-4 text-dark">Login</h3>
+      <form method="POST" action="{% url 'loginp' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+          <input type="text" class="form-control" id="uname" name="uname" placeholder="Enter username">
+        </div>
+        <div class="mb-3">
+          <input type="password" class="form-control" id="pswd" name="pswd" placeholder="Enter password">
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+        <p class="text-center mt-3">
+          <a href="#" id="showLogin">Forget password</a>
+        </p>
+
+      </form>
+      {% for message in messages %}
+      <p> 
+          <div class="alert alert-danger alert-dismissible fade show mt-5 col-md-12">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" area-label="close">
+                  <span>&times;</span></button>
+          </div>
+      </p>
+          {% endfor %}
+
+    </div>
+
+    
+{% endblock content %}
+    
